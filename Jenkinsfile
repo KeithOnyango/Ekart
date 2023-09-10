@@ -32,9 +32,10 @@ pipeline {
         stage('Sonarqube Analysis') {
             steps {
                 withSonarQubeEnv('sonar'){
-                   sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=EKART \
-                   -Dsonar.java.binaries=. \
-                   -Dsonar.projectKey=EKART '''
+                   sh 'mvn clean package sonar:sonar'
+                   // sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=EKART \
+                   // -Dsonar.java.binaries=. \
+                   // -Dsonar.projectKey=EKART '''
                }
             }
         }
