@@ -12,11 +12,11 @@ pipeline {
     
     stages{
         
-        stage('Git Checkout') {
-            steps {
-                git branch: 'main', url: 'https://github.com/KeithOnyango/Ekart.git'
-            }
-        }
+        // stage('Git Checkout') {
+        //     steps {
+        //         git branch: 'main', url: 'https://github.com/KeithOnyango/Ekart.git'
+        //     }
+        // }
         
         stage("Code Compile"){
             steps{
@@ -40,7 +40,12 @@ pipeline {
                    }
             }
         }
-        
+
+        stage("Quality Gate") {
+            steps {
+            waitForQualityGate abortPipeline: true
+            }
+        }
         
         
         stage("OWASP Dependency Check"){
@@ -86,7 +91,7 @@ pipeline {
         
         stage("Deploy Application"){
             steps{
-                sh "docker run -d --name ekart -p 8070:8070 xpertdocker254/shopping-cart:latest"
+                sh "docker run -d --name ekart1 -p 8070:8070 xpertdocker254/shopping-cart:latest"
             }
         }
     }
