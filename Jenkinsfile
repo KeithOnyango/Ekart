@@ -91,7 +91,7 @@ pipeline {
         
         stage("Deploy Application"){
             steps{
-                sh "docker run -d --name ekart1 -p 8070:8070 xpertdocker254/shopping-cart:latest"
+                sh "docker run -d --name ekart -p 8070:8070 xpertdocker254/shopping-cart:latest"
             }
         }
     }
